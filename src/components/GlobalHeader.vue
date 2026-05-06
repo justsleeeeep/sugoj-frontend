@@ -2,7 +2,7 @@
   <div class="menu-demo">
     <a-menu
       mode="horizontal"
-      :selected-keys="selectedKeys"
+      :selected-keys="[route.path]"
       @menu-item-click="doMenuClick"
     >
       <a-menu-item
@@ -28,10 +28,10 @@ import { useRouter, useRoute } from "vue-router";
 import { ref } from "vue";
 const router = useRouter();
 const route = useRoute();
-const selectedKeys = ref(["/"]);
-router.afterEach((to, from, failure) => {
-  selectedKeys.value = [to.path];
-});
+// const selectedKeys = ref(["/"]);
+// router.afterEach((to, from, failure) => {
+//   selectedKeys.value = [to.path];
+// });
 const doMenuClick = (key: string) => {
   router.push({
     path: key,
