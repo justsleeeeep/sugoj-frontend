@@ -6,7 +6,7 @@ export default {
     loginUser: {
       userName: "未登录",
       meta: {
-        access: "nologin",
+        role: "nologin",
       },
     },
   }),
@@ -15,7 +15,7 @@ export default {
     getLoginUser({ commit }, payload) {
       commit("updateUser", {
         userName: "sugpepper",
-        meta: { access: "admin" },
+        meta: { role: "admin" },
       });
     },
   },

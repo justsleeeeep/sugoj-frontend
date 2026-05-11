@@ -4,6 +4,7 @@
     class="grid-demo"
     style="margin-bottom: 16px"
     align="center"
+    :wrap="false"
   >
     <a-col flex="auto">
       <a-menu
@@ -46,8 +47,9 @@ setTimeout(() => {
 }, 3000);
 router.beforeEach((to, form, next) => {
   const user = store.state.user.loginUser;
-  if (to.path == "/admin") {
-    if (user.meta.access != "admin") {
+  if (to.meta.access == "canAdmin") {
+    console.log(user.meta.role);
+    if (user.meta.role != "admin") {
       next("/NoAuth");
       return;
     }

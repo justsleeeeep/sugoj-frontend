@@ -13,6 +13,9 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/admin",
     name: "仅管理员可见",
     component: AdminView,
+    meta: {
+      access: "canAdmin",
+    },
   },
   {
     path: "/noAuth",
