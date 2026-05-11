@@ -1,33 +1,48 @@
 <template>
-  <div class="menu-demo">
-    <a-menu
-      mode="horizontal"
-      :selected-keys="[route.path]"
-      @menu-item-click="doMenuClick"
-    >
-      <a-menu-item
-        key="0"
-        :style="{ padding: 0, marginRight: '38px' }"
-        disabled
+  <a-row
+    id="globalheader"
+    class="grid-demo"
+    style="margin-bottom: 16px"
+    align="center"
+  >
+    <a-col flex="auto">
+      <a-menu
+        mode="horizontal"
+        :selected-keys="[route.path]"
+        @menu-item-click="doMenuClick"
       >
-        <div class="title-bar">
-          <img class="logo" src="../assets/oj-logo.png" />
-          <div class="title">SUG-OJ</div>
-        </div>
-      </a-menu-item>
-      <a-menu-item v-for="item in routes" :key="item.path">
-        {{ item.name }}
-      </a-menu-item>
-    </a-menu>
-  </div>
+        <a-menu-item
+          key="0"
+          :style="{ padding: 0, marginRight: '38px' }"
+          disabled
+        >
+          <div class="title-bar">
+            <img class="logo" src="../assets/oj-logo.png" />
+            <div class="title">SUG-OJ</div>
+          </div>
+        </a-menu-item>
+        <a-menu-item v-for="item in routes" :key="item.path">
+          {{ item.name }}
+        </a-menu-item>
+      </a-menu>
+    </a-col>
+    <a-col flex="100px">
+      <div>{{ store.state.user.loginUser.userName }}</div>
+    </a-col>
+  </a-row>
 </template>
 
 <script setup lang="ts">
 import { routes } from "../router/routes";
 import { useRouter, useRoute } from "vue-router";
 import { ref } from "vue";
+import { useStore } from "vuex";
 const router = useRouter();
 const route = useRoute();
+const store = useStore();
+setTimeout(() => {
+  store.dispatch("user/getLoginUser", { userName: "sugpepper" });
+}, 3000);
 // const selectedKeys = ref(["/"]);
 // router.afterEach((to, from, failure) => {
 //   selectedKeys.value = [to.path];
