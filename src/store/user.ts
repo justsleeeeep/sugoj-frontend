@@ -5,12 +5,18 @@ export default {
   state: () => ({
     loginUser: {
       userName: "未登录",
+      meta: {
+        access: "nologin",
+      },
     },
   }),
   getters: {},
   actions: {
-    getLoginUser({ commit, state }, payload) {
-      commit("updateUser", { userName: "sugpepper" });
+    getLoginUser({ commit }, payload) {
+      commit("updateUser", {
+        userName: "sugpepper",
+        meta: { access: "admin" },
+      });
     },
   },
   mutations: {

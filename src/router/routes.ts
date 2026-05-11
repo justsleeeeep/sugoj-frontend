@@ -1,11 +1,23 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import NoAuthView from "../views/NoAuthView.vue";
+import AdminView from "../views/AdminView.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "浏览题目",
     component: HomeView,
+  },
+  {
+    path: "/admin",
+    name: "仅管理员可见",
+    component: AdminView,
+  },
+  {
+    path: "/noAuth",
+    name: "无权限",
+    component: NoAuthView,
   },
   {
     path: "/about",
