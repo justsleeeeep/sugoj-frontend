@@ -2,10 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { Post } from './Post';
+import type { Post } from "./Post";
 export type BaseResponse_Post_ = {
-    code?: number;
-    data?: Post;
-    message?: string;
+  code?: number;
+  data?: Post;
+  message?: string;
 };
-

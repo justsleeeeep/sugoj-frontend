@@ -53,27 +53,12 @@ const visibleRoutes = computed(() => {
     return true;
   });
 });
-setTimeout(() => {
-  store.dispatch("user/getLoginUser", {
-    userName: "sugpepper",
-    userRole: ACCESS_ENUM.ADMIN,
-  });
-}, 3000);
-// router.beforeEach((to, form, next) => {
-//   const user = store.state.user.loginUser;
-//   if (to.meta.access == ACCESS_ENUM.ADMIN) {
-//     console.log(user.meta.role);
-//     if (user.meta.userRole != ACCESS_ENUM.ADMIN) {
-//       next("/NoAuth");
-//       return;
-//     }
-//   }
-//   next();
-// });
-// const selectedKeys = ref(["/"]);
-// router.afterEach((to, from, failure) => {
-//   selectedKeys.value = [to.path];
-// });
+// setTimeout(() => {
+//   store.dispatch("user/getLoginUser", {
+//     userName: "sugpepper",
+//     userRole: ACCESS_ENUM.ADMIN,
+//   });
+// }, 3000);
 const doMenuClick = (key: string) => {
   router.push({
     path: key,
