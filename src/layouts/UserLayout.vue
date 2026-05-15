@@ -13,7 +13,7 @@
         <router-view />
       </a-layout-content>
       <a-layout-footer class="footer">
-        <a href="http://localhost:8080"> 神秘网址 </a>
+        <!-- <a href="http://localhost:8080"> 神秘网址 </a> -->
       </a-layout-footer>
     </a-layout>
   </div>

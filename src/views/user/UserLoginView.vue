@@ -22,6 +22,9 @@
           >登录</a-button
         >
       </a-form-item>
+      <a style="text-align: left" href="http://localhost:8080/user/register">
+        没账号请点击注册
+      </a>
     </a-form>
     <!-- {{ form }} -->
   </div>

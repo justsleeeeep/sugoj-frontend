@@ -10,7 +10,7 @@ import GlobalHeader from "@/components/GlobalHeader.vue";
         <router-view />
       </a-layout-content>
       <a-layout-footer class="footer">
-        <a href="http://localhost:8080"> 神秘网址 </a>
+        <a href="http://localhost:8080/user/login"> 如果未登录请点击我登录 </a>
       </a-layout-footer>
     </a-layout>
   </div>
