@@ -1,5 +1,6 @@
 <template>
   <div id="code-editor" ref="codeEditorRef"></div>
+  <button @click="printCode">打印代码</button>
 </template>
 
 <script setup>
@@ -7,9 +8,9 @@ import { ref, onMounted } from "vue";
 import * as monaco from "monaco-editor";
 
 const codeEditorRef = ref();
-
+let editor = null;
 onMounted(() => {
-  monaco.editor.create(codeEditorRef.value, {
+  editor = monaco.editor.create(codeEditorRef.value, {
     value: `#include <bits/stdc++.h>
 using namespace std;
 
@@ -26,6 +27,9 @@ int main() {
     },
   });
 });
+const printCode = () => {
+  console.log(editor.getValue());
+};
 </script>
 
 <style>
