@@ -1,16 +1,31 @@
 <template>
-  <div id="code-editor" ref="codeEditorRef" />
-  <Editor :value="modelValue" :plugins="plugins" @change="handleChange" />
+  <div id="code-editor" ref="codeEditorRef"></div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from "vue";
 import * as monaco from "monaco-editor";
+
 const codeEditorRef = ref();
-const myEditor = monaco.editor.create(document.getElementById("container"), {
-  value,
-  language: "javascript",
-  automaticLayout: true,
+
+onMounted(() => {
+  monaco.editor.create(codeEditorRef.value, {
+    value: `#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    cout << "Hello World";
+}`,
+    language: "cpp",
+    theme: "vs-dark",
+    automaticLayout: true,
+  });
 });
 </script>
 
-<style></style>
+<style>
+#code-editor {
+  height: 500px;
+  border: 1px solid #333;
+}
+</style>

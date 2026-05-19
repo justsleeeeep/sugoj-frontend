@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import MdEdit from "@/components/MdEdit.vue";
+import CodeEdit from "@/components/CodeEdit.vue";
 
 const content = ref("");
 
@@ -14,5 +15,6 @@ watch(content, (newValue) => {
   <div class="about">
     <MdEdit v-model="content" />
     <h1>This is an about page</h1>
+    <CodeEdit />
   </div>
 </template>
