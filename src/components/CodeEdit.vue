@@ -19,6 +19,11 @@ int main() {
     language: "cpp",
     theme: "vs-dark",
     automaticLayout: true,
+    minimap: {
+      enabled: true,
+      scale: 3,
+      size: "fill",
+    },
   });
 });
 </script>
