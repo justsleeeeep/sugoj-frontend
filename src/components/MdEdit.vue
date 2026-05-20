@@ -1,5 +1,10 @@
 <template>
-  <Editor :value="modelValue" :plugins="plugins" @change="handleChange" />
+  <Editor
+    :value="modelValue"
+    mode="split"
+    :plugins="plugins"
+    @change="handleChange"
+  />
 </template>
 
 <script>
