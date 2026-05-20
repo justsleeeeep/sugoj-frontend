@@ -1,20 +1,33 @@
 <template>
-  <a-table :columns="columns" :data="data" :pagination="pagination">
+  <a-table
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+    @page-change="onPageChange"
+  >
     <template #optional="{ record }">
       <a-button
+        status="success"
         @click="$modal.info({ title: '题目内容', content: record.content })"
       >
-        view
+        查看
       </a-button>
+      <a-button status="danger" @click="doDelete(record)"> 删除 </a-button>
+      <a-button status="warning" @click="doUpdate(record)"> 修改 </a-button>
     </template>
   </a-table>
 </template>
 
-<script>
+<script lang="ts">
 import { ref, reactive, onMounted } from "vue";
-import { QuestionControllerService } from "../../../generated";
+import { QuestionControllerService, Question } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
-
+const doDelete = (question: Question) => {
+  console.log(question);
+};
+const doUpdate = (question: Question) => {
+  console.log(question);
+};
 export default {
   setup() {
     const data = ref([]);
@@ -22,11 +35,16 @@ export default {
     // 分页对象
     const pagination = reactive({
       current: 1,
-      pageSize: 10,
+      pageSize: 5,
       total: 0,
+      showTotal: true,
     });
 
     const columns = [
+      {
+        title: "ID",
+        dataIndex: "id",
+      },
       {
         title: "标题",
         dataIndex: "title",
@@ -74,6 +92,10 @@ export default {
         message.error("查询失败：" + res.message);
       }
     };
+    const onPageChange = (page) => {
+      pagination.current = page;
+      loadData();
+    };
 
     onMounted(() => {
       loadData();
@@ -83,6 +105,9 @@ export default {
       columns,
       data,
       pagination,
+      onPageChange,
+      doDelete,
+      doUpdate,
     };
   },
 };
