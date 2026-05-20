@@ -2,15 +2,15 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type User = {
+export type QuestionVO = {
+  acceptNum?: number;
+  content?: string;
   createTime?: string;
-  gender?: number;
   id?: number;
-  isDelete?: number;
+  judgeConfig?: string;
+  submitNum?: number;
+  tags?: Array<string>;
+  title?: string;
   updateTime?: string;
-  userAccount?: string;
-  userAvatar?: string;
-  userName?: string;
-  userPassword?: string;
-  userRole?: string;
+  userId?: number;
 };

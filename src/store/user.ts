@@ -24,7 +24,7 @@ export default {
           userRole: ACCESS_ENUM.NOT_LOGIN,
           //userRole: payload.userRole,
         });
-        console.log(state.loginUser);
+        // console.log(state.loginUser);
       }
     },
   },

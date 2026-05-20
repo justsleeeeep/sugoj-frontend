@@ -44,7 +44,8 @@ const router = useRouter();
 const store = useStore();
 const handleSubmit = async () => {
   const res = await UserControllerService.userLoginUsingPost(form);
-  //console.log(res);
+  console.log(res);
+  console.log(form);
   if (res.code == 0) {
     //alert("登录成功" + JSON.stringify(res.data));
     await store.dispatch("user/getLoginUser");

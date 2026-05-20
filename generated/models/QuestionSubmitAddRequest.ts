@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type BaseResponse_long_ = {
-  code?: number;
-  data?: number;
-  message?: string;
+export type QuestionSubmitAddRequest = {
+  code?: string;
+  language?: string;
+  questionId?: number;
 };

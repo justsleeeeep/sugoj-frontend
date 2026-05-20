@@ -2,15 +2,15 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type User = {
+export type QuestionSubmit = {
+  code?: string;
   createTime?: string;
-  gender?: number;
   id?: number;
   isDelete?: number;
+  judgeInfo?: string;
+  language?: string;
+  questionId?: number;
+  status?: number;
   updateTime?: string;
-  userAccount?: string;
-  userAvatar?: string;
-  userName?: string;
-  userPassword?: string;
-  userRole?: string;
+  userId?: number;
 };

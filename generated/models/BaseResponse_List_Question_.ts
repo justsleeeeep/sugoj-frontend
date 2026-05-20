@@ -2,8 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type BaseResponse_long_ = {
+import type { Question } from "./Question";
+export type BaseResponse_List_Question_ = {
   code?: number;
-  data?: number;
+  data?: Array<Question>;
   message?: string;
 };
