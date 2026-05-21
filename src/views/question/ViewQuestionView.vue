@@ -91,6 +91,7 @@ const codeAndLan = ref({
   code: "",
 });
 const doSubmit = async () => {
+  console.log(codeAndLan.value);
   const res = await QuestionSubmitControllerService.addQuestionSubmitUsingPost(
     codeAndLan.value,
   );
