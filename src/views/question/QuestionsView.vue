@@ -48,20 +48,8 @@ const columns = [
     dataIndex: "tags",
   },
   {
-    title: "提交数",
-    dataIndex: "submitNum",
-  },
-  {
-    title: "通过数",
-    dataIndex: "acceptNum",
-  },
-  {
-    title: "创建时间",
-    dataIndex: "createTime",
-  },
-  {
-    title: "更新时间",
-    dataIndex: "updateTime",
+    title: "通过率",
+    // dataIndex: "tags",
   },
   {
     title: "Optional",

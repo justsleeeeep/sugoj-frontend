@@ -133,12 +133,21 @@ onMounted(() => {
   loadData();
 });
 const doSubmit = async () => {
-  console.log(form);
-  const res = await QuestionControllerService.addQuestionUsingPost(form);
-  if (res.code == 0) {
-    message.success("创建成功");
+  if (updatePage) {
+    const res = await QuestionControllerService.updateQuestionUsingPost(form);
+    if (res.code == 0) {
+      message.success("更新成功");
+    } else {
+      message.error("创建失败" + res.message);
+    }
   } else {
-    message.error("创建失败" + res.message);
+    //console.log(form);
+    const res = await QuestionControllerService.addQuestionUsingPost(form);
+    if (res.code == 0) {
+      message.success("创建成功");
+    } else {
+      message.error("更新失败" + res.message);
+    }
   }
 };
 const handleAdd = () => {
