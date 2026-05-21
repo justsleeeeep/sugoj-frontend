@@ -1,19 +1,61 @@
 <template>
+  <a-form :model="searchParams" layout="inline">
+    <a-form-item field="title" label="标题">
+      <a-input
+        v-model="searchParams.title"
+        placeholder="请输入标题"
+        style="width: 200px"
+      />
+    </a-form-item>
+
+    <a-form-item field="tags" label="标签">
+      <a-input
+        v-model="searchParams.tags"
+        placeholder="请输入标签"
+        style="width: 200px"
+      />
+    </a-form-item>
+
+    <a-form-item field="id" label="题号">
+      <a-input
+        v-model="searchParams.id"
+        placeholder="请输入题号"
+        style="width: 200px"
+      />
+    </a-form-item>
+
+    <a-form-item>
+      <a-space>
+        <a-button type="primary" @click="doSearch"> 搜索 </a-button>
+      </a-space>
+    </a-form-item>
+  </a-form>
+
   <a-table
     :columns="columns"
     :data="data"
     :pagination="pagination"
     @page-change="onPageChange"
   >
+    <template #tags="{ record }">
+      <a-space wrap>
+        <a-tag v-for="(tag, index) of record.tags" :key="index" color="#0fc6c2">
+          {{ tag }}
+        </a-tag>
+      </a-space>
+    </template>
+    <template #acceptedRate="{ record }">
+      {{ record.submitNum ? record.acceptNum / record.submitNum : 0 }}%({{
+        record.acceptNum
+      }}/{{ record.submitNum }})
+    </template>
+    <template #createTime="{ record }">
+      {{ moment(record.createTime).format("YYYY-MM-DD") }}
+    </template>
     <template #optional="{ record }">
-      <a-button
-        status="success"
-        @click="$modal.info({ title: '题目内容', content: record.content })"
-      >
-        查看
+      <a-button shape="round" type="text" @click="toQuestionPage(record)">
+        去做题
       </a-button>
-      <a-button status="danger" @click="doDelete(record)"> 删除 </a-button>
-      <a-button status="warning" @click="doUpdate(record)"> 修改 </a-button>
     </template>
   </a-table>
 </template>
@@ -23,9 +65,15 @@ import { ref, reactive, onMounted } from "vue";
 import { QuestionControllerService, Question } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
 import { useRouter } from "vue-router";
+import moment from "moment";
 const router = useRouter();
 const data = ref([]);
 
+const searchParams = reactive({
+  id: undefined,
+  title: "",
+  tags: "",
+});
 // 分页对象
 const pagination = reactive({
   current: 1,
@@ -45,14 +93,18 @@ const columns = [
   },
   {
     title: "标签",
-    dataIndex: "tags",
+    slotName: "tags",
   },
   {
     title: "通过率",
-    // dataIndex: "tags",
+    slotName: "acceptedRate",
   },
   {
-    title: "Optional",
+    title: "创建时间",
+    slotName: "createTime",
+  },
+  {
+    title: "操作",
     slotName: "optional",
   },
 ];
@@ -61,8 +113,13 @@ const loadData = async () => {
   const res = await QuestionControllerService.listQuestionByPageUsingGet(
     undefined,
     pagination.current,
-    undefined,
+    searchParams.id,
     pagination.pageSize,
+    undefined,
+    undefined,
+    searchParams.tags,
+    searchParams.title,
+    undefined,
   );
 
   if (res.code === 0) {
@@ -76,31 +133,20 @@ const onPageChange = (page) => {
   pagination.current = page;
   loadData();
 };
-
-onMounted(() => {
-  loadData();
-});
-
-const doDelete = async (question: Question) => {
-  console.log(question);
-  const res = await QuestionControllerService.deleteQuestionUsingPost({
-    id: question.id,
-  });
-  console.log(res.code);
-  if (res.code == 0) {
-    message.success("删除成功");
-    loadData();
-  } else {
-    message.error("删除失败" + res.message);
-  }
-};
-const doUpdate = async (question: Question) => {
-  console.log(question);
+const toQuestionPage = (question: Question) => {
   router.push({
-    path: "/question/update",
+    path: "/view/question",
     query: {
       id: question.id,
     },
   });
 };
+const doSearch = () => {
+  pagination.current = 1;
+  loadData();
+};
+
+onMounted(() => {
+  loadData();
+});
 </script>
