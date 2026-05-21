@@ -1,6 +1,6 @@
 <template>
   <div id="code-editor" ref="codeEditorRef"></div>
-  <button @click="printCode">打印代码</button>
+  <!-- <button @click="printCode">打印代码</button> -->
 </template>
 
 <script setup>
@@ -34,7 +34,7 @@ const printCode = () => {
 
 <style>
 #code-editor {
-  height: 500px;
+  height: 400px;
   border: 1px solid #333;
 }
 </style>

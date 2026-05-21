@@ -9,6 +9,7 @@ import UserRegisterView from "@/views/user/UserRegisterView.vue";
 import QuestionAddView from "@/views/question/QuestionAddView.vue";
 import QuestionManageView from "@/views/question/QuestionManageView.vue";
 import QuestionsView from "@/views/question/QuestionsView.vue";
+import ViewQuestionView from "@/views/question/ViewQuestionView.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -55,6 +56,16 @@ export const routes: Array<RouteRecordRaw> = [
     component: QuestionAddView,
     meta: {
       access: ACCESS_ENUM.ADMIN,
+      hideInMenu: true,
+    },
+  },
+  {
+    path: "/view/question/:id",
+    name: "在线做题",
+    component: ViewQuestionView,
+    props: true,
+    meta: {
+      access: ACCESS_ENUM.USER,
       hideInMenu: true,
     },
   },
