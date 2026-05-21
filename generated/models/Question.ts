@@ -3,17 +3,18 @@
 /* tslint:disable */
 /* eslint-disable */
 export type Question = {
-  acceptNum?: number;
-  answer?: string;
-  content?: string;
-  createTime?: string;
-  id?: number;
-  isDelete?: number;
-  judgeCase?: string;
-  judgeConfig?: string;
-  submitNum?: number;
-  tags?: string;
-  title?: string;
-  updateTime?: string;
-  userId?: number;
+    acceptNum?: number;
+    answer?: string;
+    content?: string;
+    createTime?: string;
+    id?: number;
+    isDelete?: number;
+    judgeCase?: string;
+    judgeConfig?: string;
+    submitNum?: number;
+    tags?: string;
+    title?: string;
+    updateTime?: string;
+    userId?: number;
 };
+

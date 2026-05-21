@@ -3,14 +3,15 @@
 /* tslint:disable */
 /* eslint-disable */
 export type QuestionVO = {
-  acceptNum?: number;
-  content?: string;
-  createTime?: string;
-  id?: number;
-  judgeConfig?: string;
-  submitNum?: number;
-  tags?: Array<string>;
-  title?: string;
-  updateTime?: string;
-  userId?: number;
+    acceptNum?: number;
+    content?: string;
+    createTime?: string;
+    id?: number;
+    judgeConfig?: string;
+    submitNum?: number;
+    tags?: Array<string>;
+    title?: string;
+    updateTime?: string;
+    userId?: number;
 };
+

@@ -56,14 +56,14 @@
           <a-space direction="vertical" style="min-width: 640px">
             <a-form-item
               :field="`from.judgeCase[${index}].input`"
-              :label="`输入用例`"
+              :label="`输入用例${index}`"
               :key="index"
             >
               <a-input v-model="judgeCaseItem.input" placeholder="输入" />
             </a-form-item>
             <a-form-item
               :field="`from.judgeCase[${index}].output`"
-              :label="`输出用例`"
+              :label="`输出用例${index}`"
               :key="index"
             >
               <a-input v-model="judgeCaseItem.output" placeholder="输出" />
@@ -95,28 +95,42 @@
 <script setup lang="ts">
 import MdEdit from "@/components/MdEdit.vue";
 import { QuestionControllerService } from "../../../generated";
-import { reactive } from "vue";
+import { onMounted, reactive } from "vue";
 import message from "@arco-design/web-vue/es/message";
+import { useRoute } from "vue-router";
+const route = useRoute();
+const updatePage = route.path.includes("update");
 const form = reactive({
-  title: "A+B",
-  tags: ["easy"],
-  content: "A+B",
-  answer: "无题解",
+  title: "",
+  tags: [],
+  content: "",
+  answer: "",
   judgeConfig: {
     timelimit: 1000,
     memorylimit: 524288,
     stacklimit: 524288,
   },
-  judgeCase: [
-    {
-      input: "1 1",
-      output: "2",
-    },
-    {
-      input: "2 5",
-      output: "7",
-    },
-  ],
+  judgeCase: [],
+});
+const loadData = async () => {
+  const id = route.query.id;
+  if (!id) return;
+  const res = await QuestionControllerService.getQuestionByIdUsingGet(
+    id as any,
+  );
+  if (res.code == 0)
+    Object.assign(form, {
+      ...res.data,
+      tags: JSON.parse(res.data.tags || "[]"),
+
+      judgeCase: JSON.parse(res.data.judgeCase || "[]"),
+
+      judgeConfig: JSON.parse(res.data.judgeConfig || "{}"),
+    });
+  else message.error("加载失败" + res.message);
+};
+onMounted(() => {
+  loadData();
 });
 const doSubmit = async () => {
   console.log(form);

@@ -3,9 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { Question } from './Question';
-export type BaseResponse_List_Question_ = {
+export type BaseResponse_Question_ = {
     code?: number;
-    data?: Array<Question>;
+    data?: Question;
     message?: string;
 };
 
