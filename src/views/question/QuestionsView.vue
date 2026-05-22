@@ -135,10 +135,7 @@ const onPageChange = (page) => {
 };
 const toQuestionPage = (question: Question) => {
   router.push({
-    path: "/view/question",
-    query: {
-      id: question.id,
-    },
+    path: "/view/question/" + question.id,
   });
 };
 const doSearch = () => {

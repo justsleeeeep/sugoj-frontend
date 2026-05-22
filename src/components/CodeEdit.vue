@@ -1,35 +1,52 @@
 <template>
   <div id="code-editor" ref="codeEditorRef"></div>
-  <!-- <button @click="printCode">打印代码</button> -->
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, defineProps, defineEmits } from "vue";
 import * as monaco from "monaco-editor";
 
+// 接收父组件传值
+const props = defineProps({
+  modelValue: {
+    type: String,
+    default: "",
+  },
+});
+
+// 向父组件传值
+const emit = defineEmits(["update:modelValue"]);
+
 const codeEditorRef = ref();
+
 let editor = null;
+
 onMounted(() => {
-  editor = monaco.editor.create(codeEditorRef.value, {
-    value: `#include <bits/stdc++.h>
+  const initValue =
+    props.modelValue ||
+    `#include <bits/stdc++.h>
 using namespace std;
 
 int main() {
     cout << "Hello World";
-}`,
+}`;
+
+  editor = monaco.editor.create(codeEditorRef.value, {
+    value: initValue,
     language: "cpp",
     theme: "vs-dark",
     automaticLayout: true,
-    minimap: {
-      enabled: true,
-      scale: 3,
-      size: "fill",
-    },
+  });
+
+  emit("update:modelValue", initValue);
+  // 监听编辑器内容变化
+  editor.onDidChangeModelContent(() => {
+    const value = editor.getValue();
+
+    // 传给父组件
+    emit("update:modelValue", value);
   });
 });
-const printCode = () => {
-  console.log(editor.getValue());
-};
 </script>
 
 <style>

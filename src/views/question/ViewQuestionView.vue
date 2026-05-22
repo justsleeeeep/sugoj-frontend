@@ -67,9 +67,10 @@ const form = ref<any>({});
 
 const route = useRoute();
 
+const Code = ref("");
 const loadData = async () => {
   const id = route.params.id;
-
+  console.log(id);
   const res = await QuestionControllerService.getQuestionByIdVoUsingGet(
     Number(id),
   );
@@ -91,6 +92,7 @@ const codeAndLan = ref({
   code: "",
 });
 const doSubmit = async () => {
+  //codeAndLan.value.code = Code.value;
   console.log(codeAndLan.value);
   const res = await QuestionSubmitControllerService.addQuestionSubmitUsingPost(
     codeAndLan.value,
